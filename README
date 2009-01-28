@@ -1,0 +1,51 @@
+NAME
+    DBICx::TxnInsert - wrap inserts into transaction
+
+SYNOPSIS
+    Quick summary of what the module does.
+
+    Perhaps a little code snippet.
+
+        use DBICx::TxnInsert;
+
+        my $foo = DBICx::TxnInsert->new();
+        ...
+
+METHODS
+  insert
+AUTHOR
+    Vladimir Timofeev, `<vovkasm at gmail.com>'
+
+BUGS
+    Please report any bugs or feature requests to `bug-dbicx-txninsert at
+    rt.cpan.org', or through the web interface at
+    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DBICx-TxnInsert. I will
+    be notified, and then you'll automatically be notified of progress on
+    your bug as I make changes.
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+        perldoc DBICx::TxnInsert
+
+    You can also look for information at:
+
+    * RT: CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBICx-TxnInsert
+
+    * AnnoCPAN: Annotated CPAN documentation
+        http://annocpan.org/dist/DBICx-TxnInsert
+
+    * CPAN Ratings
+        http://cpanratings.perl.org/d/DBICx-TxnInsert
+
+    * Search CPAN
+        http://search.cpan.org/dist/DBICx-TxnInsert/
+
+ACKNOWLEDGEMENTS
+COPYRIGHT & LICENSE
+    Copyright 2009 Vladimir Timofeev, all rights reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
