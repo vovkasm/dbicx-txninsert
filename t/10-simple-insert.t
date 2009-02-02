@@ -46,6 +46,7 @@ $schema->storage(My::Storage->new($schema));
 $schema->storage->connect_info( ['DBI:Mock:', '', ''] );
 my $dbh  = $schema->storage->dbh;
 my $user_rs = $schema->resultset('User');
+
 my $row = $user_rs->create( { name => 'user1' } );
 
 diag("Schema MRO: ".join(' -> ',Class::C3::calculateMRO(ref $schema)));
