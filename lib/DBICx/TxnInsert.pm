@@ -33,7 +33,12 @@ sub insert {
     $source ||= $self->result_source( $self->result_source_instance ) if $self->can('result_source_instance');
     $self->throw_exception("No result_source set on this object; can't insert") unless $source;
     my $ret;
-    $source->schema->txn_do( sub { $ret = $self->txn_insert(@_); } );
+    if (!$self->{_rel_in_storage}) {
+        $ret = $self->txn_insert(@_);
+    }
+    else {
+        $source->schema->txn_do( sub { $ret = $self->txn_insert(@_); } );
+    }
     return $ret;
 }
 

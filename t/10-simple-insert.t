@@ -31,7 +31,6 @@ $schema->storage->connect_info( ['DBI:Mock:', '', ''] );
 my $dbh  = $schema->storage->dbh;
 my $user_rs = $schema->resultset('User');
 
-$DB::single=1;
 my $row = $user_rs->create( { name => 'user1' } );
 
 my $hist = $dbh->{mock_all_history};
