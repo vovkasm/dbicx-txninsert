@@ -22,7 +22,8 @@ This component wrap all inserts into transactions.
 
 =head1 WARNING
 
-This module uses DBIx::Class internals, may be not compatible with feature versions of DBIx::Class.
+This module uses DBIx::Class internals, may be not compatible with future versions of DBIx::Class.
+
 You need to use it only in one case: last_insert_id should be called in same transaction as insert itself.
 For example in case you config is Application(DBIx::Class) <-> pgbouncer <-> postgresql server. 
 
@@ -86,9 +87,6 @@ L<http://cpanratings.perl.org/d/DBICx-TxnInsert>
 L<http://search.cpan.org/dist/DBICx-TxnInsert/>
 
 =back
-
-
-=head1 ACKNOWLEDGEMENTS
 
 
 =head1 COPYRIGHT & LICENSE

@@ -1,18 +1,25 @@
 NAME
-    DBICx::TxnInsert - wrap inserts into transaction
+    DBICx::TxnInsert - wrap all inserts into transaction
 
 SYNOPSIS
-    Quick summary of what the module does.
+    This component wrap all inserts into transactions.
 
-    Perhaps a little code snippet.
-
-        use DBICx::TxnInsert;
-
-        my $foo = DBICx::TxnInsert->new();
+        package My::Schema::Entity;
+        __PACKAGE__->load_components(qw/DBICx::TxnInsert Core/);
         ...
+
+WARNING
+    This module uses DBIx::Class internals, may be not compatible with
+    future versions of DBIx::Class.
+
+    You need to use it only in one case: last_insert_id should be called in
+    same transaction as insert itself. For example in case you config is
+    Application(DBIx::Class) <-> pgbouncer <-> postgresql server.
 
 METHODS
   insert
+    see DBIx::Class::Row::insert
+
 AUTHOR
     Vladimir Timofeev, `<vovkasm at gmail.com>'
 
@@ -28,8 +35,6 @@ SUPPORT
 
         perldoc DBICx::TxnInsert
 
-    You can also look for information at:
-
     * RT: CPAN's request tracker
         http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBICx-TxnInsert
 
@@ -42,7 +47,6 @@ SUPPORT
     * Search CPAN
         http://search.cpan.org/dist/DBICx-TxnInsert/
 
-ACKNOWLEDGEMENTS
 COPYRIGHT & LICENSE
     Copyright 2009 Vladimir Timofeev, all rights reserved.
 
