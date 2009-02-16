@@ -5,7 +5,7 @@ use base 'DBIx::Class::Row';
 
 =head1 NAME
 
-DBICx::TxnInsert - wrap inserts into transaction
+DBICx::TxnInsert - wrap all inserts into transaction
 
 =cut
 
@@ -14,16 +14,23 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-This moudle wrap inserts into transaction.
+This component wrap all inserts into transactions.
 
-Perhaps a little code snippet.
-
+    package My::Schema::Entity;
     __PACKAGE__->load_components(qw/DBICx::TxnInsert Core/);
     ...
+
+=head1 WARNING
+
+This module uses DBIx::Class internals, may be not compatible with feature versions of DBIx::Class.
+You need to use it only in one case: last_insert_id should be called in same transaction as insert itself.
+For example in case you config is Application(DBIx::Class) <-> pgbouncer <-> postgresql server. 
 
 =head1 METHODS
 
 =head2 insert
+
+see DBIx::Class::Row::insert
 
 =cut
 
@@ -32,23 +39,16 @@ sub insert {
     my $source = $self->result_source;
     $source ||= $self->result_source( $self->result_source_instance ) if $self->can('result_source_instance');
     $self->throw_exception("No result_source set on this object; can't insert") unless $source;
-    my $ret;
-    if (!$self->{_rel_in_storage}) {
-        $ret = $self->txn_insert(@_);
-    }
-    else {
-        $source->schema->txn_do( sub { $ret = $self->txn_insert(@_); } );
-    }
+    
+    my $rollback_guard;
+    
+    $rollback_guard = $source->storage->txn_scope_guard if $self->{_rel_in_storage};
+
+    my $ret = $self->next::method(@_);
+
+    $rollback_guard->commit if $self->{_rel_in_storage};
+
     return $ret;
-}
-
-=head2 txn_insert
-
-=cut
-
-sub txn_insert {
-    my $self = shift;
-    return $self->SUPER::insert(@_);
 }
 
 =head1 AUTHOR
@@ -61,15 +61,11 @@ Please report any bugs or feature requests to C<bug-dbicx-txninsert at rt.cpan.o
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DBICx-TxnInsert>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
     perldoc DBICx::TxnInsert
-
-
-You can also look for information at:
 
 =over 4
 
