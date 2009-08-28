@@ -9,7 +9,7 @@ DBICx::TxnInsert - wrap all inserts into transaction
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
@@ -41,13 +41,11 @@ sub insert {
     $source ||= $self->result_source( $self->result_source_instance ) if $self->can('result_source_instance');
     $self->throw_exception("No result_source set on this object; can't insert") unless $source;
     
-    my $rollback_guard;
-    
-    $rollback_guard = $source->storage->txn_scope_guard if $self->{_rel_in_storage};
+    my $rollback_guard = $source->storage->txn_scope_guard;
 
     my $ret = $self->next::method(@_);
 
-    $rollback_guard->commit if $self->{_rel_in_storage};
+    $rollback_guard->commit;
 
     return $ret;
 }

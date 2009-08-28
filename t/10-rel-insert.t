@@ -1,6 +1,6 @@
 #!perl
 
-use Test::More tests => 6;
+use Test::More tests => 7;
 
 package My::Schema::Status;
 use base 'DBIx::Class';
@@ -43,10 +43,12 @@ my $user_rs = $schema->resultset('User');
 my $row = $user_rs->create( { name => 'user1', status =>{ name => 'status1' } } );
 
 my $hist = $dbh->{mock_all_history};
-is( scalar(@$hist),        5,            '5 queries' );
-like( $hist->[0]->statement, qr/SELECT.+?FROM status.+?me\.name = \?/, '1 - select from status' );
-is( $hist->[1]->statement, 'BEGIN WORK', '2 - begin' );
-like( $hist->[2]->statement, qr/INSERT INTO.+?status/, '3 - insert into status' );
-like( $hist->[3]->statement, qr/INSERT INTO.+?user/, '4 - insert into user' );
-is( $hist->[4]->statement, 'COMMIT', '5 - commit' );
+is( scalar(@$hist),        6,            '6 queries' );
+my $i = 0;
+like( $hist->[$i++]->statement, qr/SELECT.+?FROM status.+?me\.name = \?/, '1 - select from status' );
+is( $hist->[$i++]->statement, 'BEGIN WORK', '2 - begin' );
+like( $hist->[$i++]->statement, qr/SELECT.+?FROM status.+?me\.name = \?/, '3 - select from status' );
+like( $hist->[$i++]->statement, qr/INSERT INTO.+?status/, '4 - insert into status' );
+like( $hist->[$i++]->statement, qr/INSERT INTO.+?user/, '5 - insert into user' );
+is( $hist->[$i++]->statement, 'COMMIT', '6 - commit' );
 

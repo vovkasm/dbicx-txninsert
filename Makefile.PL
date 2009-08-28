@@ -12,5 +12,7 @@ test_requires 'Test::More';
 test_requires 'Test::Compile';
 test_requires 'DBD::Mock';
 
+githubmeta;
+
 WriteAll;
 
