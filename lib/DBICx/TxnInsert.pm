@@ -17,7 +17,7 @@ our $VERSION = '0.02';
 This component wrap all inserts into transactions.
 
     package My::Schema::Entity;
-    __PACKAGE__->load_components(qw/DBICx::TxnInsert Core/);
+    __PACKAGE__->load_components(qw/+DBICx::TxnInsert Core/);
     ...
 
 =head1 WARNING
@@ -87,13 +87,10 @@ L<http://search.cpan.org/dist/DBICx-TxnInsert/>
 =back
 
 
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Vladimir Timofeev, all rights reserved.
+=head1 LICENSE
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
-
 
 =cut
 

@@ -5,6 +5,7 @@ perl_version '5.006001';
 author 'Vladimir Timofeev <vovkasm@gmail.com>';
 license 'perl';
 all_from 'lib/DBICx/TxnInsert.pm';
+readme_from 'lib/DBICx/TxnInsert.pm';
 
 requires 'DBIx::Class' => 0.08010;
 

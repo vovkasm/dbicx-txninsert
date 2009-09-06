@@ -5,7 +5,7 @@ SYNOPSIS
     This component wrap all inserts into transactions.
 
         package My::Schema::Entity;
-        __PACKAGE__->load_components(qw/DBICx::TxnInsert Core/);
+        __PACKAGE__->load_components(qw/+DBICx::TxnInsert Core/);
         ...
 
 WARNING
@@ -21,12 +21,12 @@ METHODS
     see DBIx::Class::Row::insert
 
 AUTHOR
-    Vladimir Timofeev, `<vovkasm at gmail.com>'
+    Vladimir Timofeev, "<vovkasm at gmail.com>"
 
 BUGS
-    Please report any bugs or feature requests to `bug-dbicx-txninsert at
-    rt.cpan.org', or through the web interface at
-    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DBICx-TxnInsert. I will
+    Please report any bugs or feature requests to "bug-dbicx-txninsert at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=DBICx-TxnInsert>. I will
     be notified, and then you'll automatically be notified of progress on
     your bug as I make changes.
 
@@ -35,21 +35,23 @@ SUPPORT
 
         perldoc DBICx::TxnInsert
 
-    * RT: CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBICx-TxnInsert
+    *   RT: CPAN's request tracker
 
-    * AnnoCPAN: Annotated CPAN documentation
-        http://annocpan.org/dist/DBICx-TxnInsert
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=DBICx-TxnInsert>
 
-    * CPAN Ratings
-        http://cpanratings.perl.org/d/DBICx-TxnInsert
+    *   AnnoCPAN: Annotated CPAN documentation
 
-    * Search CPAN
-        http://search.cpan.org/dist/DBICx-TxnInsert/
+        <http://annocpan.org/dist/DBICx-TxnInsert>
 
-COPYRIGHT & LICENSE
-    Copyright 2009 Vladimir Timofeev, all rights reserved.
+    *   CPAN Ratings
 
+        <http://cpanratings.perl.org/d/DBICx-TxnInsert>
+
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/DBICx-TxnInsert/>
+
+LICENSE
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
 
